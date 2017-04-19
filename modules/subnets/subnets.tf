@@ -4,7 +4,7 @@ data "aws_availability_zones" "available" {
 resource "aws_subnet" "public_subnet" {
   count = "${length(data.aws_availability_zones.available.names)}"
   vpc_id = "${var.vpc_id}"
-  cidr_block = "${cidrsubnet(var.vpc_cidr, 8, count.index)}"
+  cidr_block = "${cidrsubnet(var.vpc_cidr, 4, count.index)}"
   availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
 
   tags {
@@ -19,7 +19,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "app_subnet" {
   count = "${length(data.aws_availability_zones.available.names)}"
   vpc_id = "${var.vpc_id}"
-  cidr_block = "${cidrsubnet(var.vpc_cidr, 8, count.index + 10)}"
+  cidr_block = "${cidrsubnet(var.vpc_cidr, 4, count.index + 5)}"
   availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
 
   tags {
@@ -34,7 +34,7 @@ resource "aws_subnet" "app_subnet" {
 resource "aws_subnet" "data_subnet" {
   count = "${length(data.aws_availability_zones.available.names)}"
   vpc_id = "${var.vpc_id}"
-  cidr_block = "${cidrsubnet(var.vpc_cidr, 8, count.index + 20)}"
+  cidr_block = "${cidrsubnet(var.vpc_cidr, 4, count.index + 10)}"
   availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
 
   tags {
