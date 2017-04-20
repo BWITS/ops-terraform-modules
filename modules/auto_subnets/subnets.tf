@@ -12,7 +12,7 @@ resource "aws_subnet" "public_subnet" {
     terraform = true
     ops_terraform_modules = true
     type = "public"
-    module = "subnets"
+    module = "auto_subnets"
   }
 }
 
@@ -27,7 +27,7 @@ resource "aws_subnet" "app_subnet" {
     terraform = true
     ops_terraform_modules = true
     type = "app"
-    module = "subnets"
+    module = "auto_subnets"
   }
 }
 
@@ -42,6 +42,6 @@ resource "aws_subnet" "data_subnet" {
     terraform = true
     ops_terraform_modules = true
     type = "data"
-    module = "subnets"
+    module = "auto_subnets"
   }
 }
