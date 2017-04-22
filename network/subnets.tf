@@ -6,6 +6,7 @@ module "app_nat" {
   source = "./nat"
   name = "${var.name}"
   subnet_ids = "${module.app_subnet.subnet_ids}"
+  availability_zones = "${var.availability_zones}"
 }
 
 module "public_subnet" {
