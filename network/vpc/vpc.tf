@@ -7,9 +7,20 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags {
-    Name = "${var.stack_name}-vpc"
+    Name = "${var.name}-vpc"
     terraform = true
     ops_terraform_modules = true
+    module = "vpc"
+  }
+}
+
+resource "aws_internet_gateway" "main" {
+  vpc_id = "${aws_vpc.main.id}"
+
+  tags {
+    Name = "${var.name}-gateway"
+    terraform = true
+    myob_aws_account_template = true
     module = "vpc"
   }
 }
@@ -49,7 +60,7 @@ data "aws_iam_policy_document" "flow_log_statements" {
 }
 
 resource "aws_iam_role" "flow_log" {
-  name = "${var.stack_name}-vpc-flow-log"
+  name = "${var.name}-vpc-flow-log"
   assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy.json}"
 }
 
@@ -60,7 +71,7 @@ resource "aws_iam_role_policy" "flow_log_policy" {
 }
 
 resource "aws_cloudwatch_log_group" "main_log_group" {
-  name = "${var.stack_name}-flow-logs"
+  name = "${var.name}-flow-logs"
   retention_in_days = "${var.vpc_flow_log_retention}"
 }
 
@@ -77,7 +88,7 @@ resource "aws_vpc_dhcp_options" "main" {
     "AmazonProvidedDNS"]
 
   tags {
-    Name = "${var.stack_name}-dhcp"
+    Name = "${var.name}-dhcp"
     terraform = true
     ops_terraform_modules = true
     module = "vpc"
