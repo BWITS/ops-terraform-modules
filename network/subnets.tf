@@ -17,7 +17,7 @@ module "public_subnet" {
 
 module "app_subnet" {
   source = "./private_subnet"
-  name = "${var.name}-app"
+  name = "${var.name}"
   vpc_id = "${var.vpc_id}"
   cidrs = "10.0.10.0/24,10.0.11.0/24,10.0.12.0/24"
   nat_gateway_ids = "${module.app_nat.nat_gateway_ids}"
@@ -25,7 +25,7 @@ module "app_subnet" {
 
 module "data_subnet" {
   source = "./data_subnet"
-  name = "${var.name}-data"
+  name = "${var.name}"
   vpc_id = "${var.vpc_id}"
   cidrs = "10.0.20.0/24,10.0.21.0/24,10.0.22.0/24"
 }
