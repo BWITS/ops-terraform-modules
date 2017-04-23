@@ -8,9 +8,9 @@ resource "aws_internet_gateway" "public" {
 
 resource "aws_subnet" "public" {
   vpc_id = "${var.vpc_id}"
-  cidr_block = "${element(split(",", var.cidrs), count.index)}"
-  availability_zone = "${element(split(",", var.availability_zones), count.index)}"
-  count = "${length(split(",", var.cidrs))}"
+  cidr_block = "${element(var.cidrs, count.index)}"
+  availability_zone = "${element(var.availability_zones, count.index)}"
+  count = "${length(var.cidrs)}"
 
   tags {
     Name = "${var.name}-public-${format("%03d", count.index+1)}"
@@ -36,7 +36,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  count = "${length(split(",", var.cidrs))}"
+  count = "${length(var.cidrs)}"
   subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${aws_route_table.public.id}"
 }

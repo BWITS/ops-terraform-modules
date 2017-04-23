@@ -6,8 +6,8 @@ variable "vpc_id" {
   type = "string"
 }
 variable "cidrs" {
-  type = "string"
+  type = "list"
 }
 variable "availability_zones" {
-  type = "string"
+  type = "list"
 }

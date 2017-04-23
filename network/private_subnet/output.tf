@@ -1,3 +1,3 @@
 output "subnet_ids" {
-  value = "${join(",", aws_subnet.private.*.id)}"
+  value = ["${aws_subnet.private.*.id}"]
 }

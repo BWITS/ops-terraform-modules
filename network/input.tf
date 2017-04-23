@@ -6,14 +6,14 @@ variable "vpc_id" {
   type = "string"
 }
 variable "availability_zones" {
-  type = "string"
+  type = "list"
 }
 variable "public_cidrs" {
-  type = "string"
+  type = "list"
 }
 variable "app_cidrs" {
-  type = "string"
+  type = "list"
 }
 variable "data_cidrs" {
-  type = "string"
+  type = "list"
 }
