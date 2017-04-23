@@ -1,7 +1,9 @@
 variable "name" {
+  type = "string"
   default = "private"
 }
 variable "vpc_id" {
+  type = "string"
 }
 variable "cidrs" {
   type = "list"

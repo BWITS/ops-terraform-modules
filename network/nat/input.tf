@@ -2,7 +2,8 @@ variable "name" {
   default = "nat"
 }
 variable "availability_zones" {
-  type = "string"
+  type = "list"
 }
 variable "subnet_ids" {
+  type = "list"
 }
