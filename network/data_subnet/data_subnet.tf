@@ -5,7 +5,7 @@ resource "aws_subnet" "data" {
   count             = "${length(var.cidrs)}"
 
   tags {
-    Name = "${var.name}-data-${format("%03d", count.index+1)}"
+    Name = "${var.name}-${format("%03d", count.index+1)}"
   }
 
   lifecycle {
@@ -17,7 +17,7 @@ resource "aws_route_table" "data" {
   vpc_id = "${var.vpc_id}"
 
   tags {
-    Name = "${var.name}-nat"
+    Name = "${var.name}"
   }
 
   lifecycle {

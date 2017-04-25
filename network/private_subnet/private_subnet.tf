@@ -5,7 +5,7 @@ resource "aws_subnet" "private" {
   count             = "${length(var.cidrs)}"
 
   tags {
-    Name = "${var.name}-private-${format("%03d", count.index+1)}"
+    Name = "${var.name}-${format("%03d", count.index+1)}"
   }
 
   lifecycle {
@@ -22,7 +22,7 @@ resource "aws_route_table" "private" {
   }
 
   tags {
-    Name = "${var.name}-private"
+    Name = "${var.name}"
   }
 
   lifecycle {
