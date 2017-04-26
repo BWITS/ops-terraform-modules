@@ -23,26 +23,20 @@ resource "aws_route_table" "private" {
   }
 }
 
-resource "aws_route_table_association" "app_1" {
-  count          = "${aws_subnet.app_1.count}"
-  subnet_id      = "${element(aws_subnet.app_1.*.id, count.index)}"
+resource "aws_route_table_association" "app" {
+  count          = "${aws_subnet.app.count}"
+  subnet_id      = "${element(aws_subnet.app.*.id, count.index)}"
   route_table_id = "${aws_route_table.public.id}"
 }
 
-resource "aws_route_table_association" "app_2" {
-  count          = "${aws_subnet.app_2.count}"
-  subnet_id      = "${element(aws_subnet.app_2.*.id, count.index)}"
-  route_table_id = "${aws_route_table.public.id}"
-}
-
-resource "aws_route_table_association" "elb" {
+resource "aws_route_table_association" "public" {
   count          = "${aws_subnet.public.count}"
   subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${aws_route_table.public.id}"
 }
 
-resource "aws_route_table_association" "db" {
-  count          = "${var.three_tier ? aws_subnet.db.count : 0}"
-  subnet_id      = "${element(aws_subnet.db.*.id, count.index)}"
+resource "aws_route_table_association" "data" {
+  count          = "${var.three_tier ? aws_subnet.data.count : 0}"
+  subnet_id      = "${element(aws_subnet.data.*.id, count.index)}"
   route_table_id = "${aws_route_table.private.id}"
 }
