@@ -1,2 +1,1 @@
-# ops-terraform-modules
-Platform Enablement Terraform modules examples
+# Deprecated - use https://github.com/MYOB-Technology/ops-cloudformation
